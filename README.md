@@ -85,6 +85,17 @@ npm install # or yarn
 ```bash
 npm start # or npm run dev (to run develepment server)
 ```
+
+## Docker Container
+
+### Build the container
+```bash
+docker build -t zenime .
+```
+### Run the container
+```bash
+docker run -d -p 5173:80 zenime
+```
 ## Live Deployment
 
 ### Vercel
