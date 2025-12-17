@@ -23,7 +23,8 @@ const useTopSearch = () => {
   useEffect(() => {
     const fetchTopSearch = async () => {
       const data = await getTopSearch();
-      if (data) setTopSearch(data);
+      if (Array.isArray(data)) setTopSearch(data);
+      else setTopSearch([]);
     };
     fetchTopSearch();
   }, []);
@@ -133,18 +134,18 @@ function SplashScreen() {
                 onKeyDown={handleKeyDown}
               />
               <button
-                className="bg-[#FFBADE] text-white py-3 px-4 rounded-xl font-extrabold"
+                className="bg-[#FFBADE] text-white py-3 px-4 rounded-xl font-extrabold group"
                 onClick={handleSearchSubmit}
               >
                 <FontAwesomeIcon
                   icon={faMagnifyingGlass}
-                  className="text-lg text-black hover:text-white max-[600px]:mt-[7px]"
+                  className="text-lg text-black group-hover:text-white max-[600px]:mt-[7px]"
                 />
               </button>
             </div>
             <div className="mt-8 text-[15px] leading-[1.6] max-[520px]:text-[13px] max-[520px]:leading-[1.4]">
               <span className="splashitem font-[600]">Top search: </span>
-              {topSearch.map((item, index) => (
+              {Array.isArray(topSearch) && topSearch.map((item, index) => (
                 <span key={index} className="splashitem font-[400]">
                   <Link to={item.link}>{item.title}</Link>
                   {index < topSearch.length - 1 && <span>, </span>}
